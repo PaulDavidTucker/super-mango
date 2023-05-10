@@ -1,9 +1,21 @@
 import pygame
 
+#A file written for this project, stored in local directory I think.
+import sys
+sys.path.insert(0, '/home/paul/Documents/Projects/super-mango/modules') 
+
+#Screensize used to determine screenSize dynamically.
+import screenSize
+#Log used to log messages. If attempting to debug just use a logger
+import log as logger
+
 pygame.init()
 
-# Create the window
-screen = pygame.display.set_mode((640, 480))
+# Create the window - GameSize here
+screen = pygame.display.set_mode((screenSize.SCREEN_WIDTH, screenSize.SCREEN_HEIGHT))
+
+#Log info
+logger.log.info(f"Screen Size set at: {screenSize.SCREEN_WIDTH} by {screenSize.SCREEN_HEIGHT}")
 
 # Load the sprite image
 sprite_image = pygame.image.load("./assets/Bird_1.png")
