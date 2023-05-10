@@ -162,3 +162,6 @@ cython_debug/
 # Emacs options
 main.py~
 *.*~
+
+#logs
+*.log
