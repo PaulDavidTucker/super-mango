@@ -1,8 +1,9 @@
 import pygame
 
 #A file written for this project, stored in local directory I think.
+#If you want to use a module from a different directory, you need to add it to the path. I NEED TO MAKE THIS DYNAMICALLY FIND THE PATH
 import sys
-sys.path.insert(1, r'C:/Users/adamt/OneDrive/Documents/programming/super-mango/modules') 
+sys.path.insert(0, '/home/paul/Documents/Projects/super-mango/modules') 
 
 #Screensize used to determine screenSize dynamically.
 import screenSize
