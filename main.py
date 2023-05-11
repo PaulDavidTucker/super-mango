@@ -27,17 +27,33 @@ sprite.image = sprite_image
 sprite.rect = sprite.image.get_rect()
 sprite.rect.center = screen.get_rect().center
 
+# Create the background image
+background_image = pygame.image.load("./assets/Forest_Background_0.png")
+background_image = pygame.transform.scale(background_image, (screenSize.SCREEN_WIDTH, screenSize.SCREEN_HEIGHT))
+
 # Game loop
+
+#tracking vars
 running = True
+i = 0
 while running:
+
+    screen.fill((0, 0, 0))
+    # Move the background
+    screen.blit(background_image, (i, 0))
+    screen.blit(background_image, (screenSize.SCREEN_WIDTH + i, 0))
+
+    if (i==-screenSize.SCREEN_WIDTH):
+        screen.blit(background_image,(screenSize.SCREEN_WIDTH+i,0))
+        i=0
+    i-=1
+
     # Handle events
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
 
-    # Draw the sprite and update the display
-    screen.fill((255, 255, 255))
-    screen.blit(sprite.image, sprite.rect)
+    
     pygame.display.update()
 
 # Clean up
