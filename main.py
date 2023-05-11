@@ -1,8 +1,14 @@
 import pygame
+#OS is a standard library module, so no need to install it.
+import os
+
+currentDirectory = os.getcwd()
+
 
 #A file written for this project, stored in local directory I think.
+#If you want to use a module from a different directory, you need to add it to the path. Support modules are in the modules folder.
 import sys
-sys.path.insert(1, r'C:/Users/adamt/OneDrive/Documents/programming/super-mango/modules') 
+sys.path.insert(0, currentDirectory+'/modules') 
 
 #Screensize used to determine screenSize dynamically.
 import screenSize
@@ -26,17 +32,33 @@ sprite.image = sprite_image
 sprite.rect = sprite.image.get_rect()
 sprite.rect.center = screen.get_rect().center
 
+# Create the background image
+background_image = pygame.image.load("./assets/Forest_Background_0.png")
+background_image = pygame.transform.scale(background_image, (screenSize.SCREEN_WIDTH, screenSize.SCREEN_HEIGHT))
+
 # Game loop
+
+#tracking vars
 running = True
+i = 0
 while running:
+
+    screen.fill((0, 0, 0))
+    # Move the background
+    screen.blit(background_image, (i, 0))
+    screen.blit(background_image, (screenSize.SCREEN_WIDTH + i, 0))
+
+    if (i==-screenSize.SCREEN_WIDTH):
+        screen.blit(background_image,(screenSize.SCREEN_WIDTH+i,0))
+        i=0
+    i-=1
+
     # Handle events
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
 
-    # Draw the sprite and update the display
-    screen.fill((255, 255, 255))
-    screen.blit(sprite.image, sprite.rect)
+    
     pygame.display.update()
 
 # Clean up
