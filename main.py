@@ -1,9 +1,14 @@
 import pygame
+#OS is a standard library module, so no need to install it.
+import os
+
+currentDirectory = os.getcwd()
+
 
 #A file written for this project, stored in local directory I think.
-#If you want to use a module from a different directory, you need to add it to the path. I NEED TO MAKE THIS DYNAMICALLY FIND THE PATH
+#If you want to use a module from a different directory, you need to add it to the path. Support modules are in the modules folder.
 import sys
-sys.path.insert(0, '/home/paul/Documents/Projects/super-mango/modules') 
+sys.path.insert(0, currentDirectory+'/modules') 
 
 #Screensize used to determine screenSize dynamically.
 import screenSize
