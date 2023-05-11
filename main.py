@@ -2,6 +2,8 @@ import pygame
 #OS is a standard library module, so no need to install it.
 import os
 
+from classes.classes import Level, Player
+
 currentDirectory = os.getcwd()
 
 
@@ -38,10 +40,49 @@ background_image = pygame.transform.scale(background_image, (screenSize.SCREEN_W
 
 # Game loop
 
+player = Player()  # spawn player
+player.rect.x = 0  # go to x
+player.rect.y = 30  # go to y
+player_list = pygame.sprite.Group()
+player_list.add(player)
+steps = 10  # how fast to move
+
+#generic enemy spawn location for now
+enemy_list = Level.bad(1, [300, 0])
+
 #tracking vars
 running = True
 i = 0
 while running:
+
+    #handle player movement
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            try:
+                sys.exit()
+            finally:
+                main = False
+
+        if event.type == pygame.KEYDOWN:
+            if event.key == ord('q'):
+                pygame.quit()
+                try:
+                    sys.exit()
+                finally:
+                    main = False
+            if event.key == pygame.K_LEFT or event.key == ord('a'):
+                player.control(-steps, 0)
+            if event.key == pygame.K_RIGHT or event.key == ord('d'):
+                player.control(steps, 0)
+            if event.key == pygame.K_UP or event.key == ord('w'):
+                print('jump')
+
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_LEFT or event.key == ord('a'):
+                player.control(steps, 0)
+            if event.key == pygame.K_RIGHT or event.key == ord('d'):
+                player.control(-steps, 0)
 
     screen.fill((0, 0, 0))
     # Move the background
