@@ -49,10 +49,13 @@ def startmenu():
     screen.blit(skybg2,(0,0))
     screen.blit(logo,(MidpointWidth - 150 ,MidpointHeight))
 
-
+#temporarily putting background scroll code here
+clock = pygame.time.Clock()
+FPS = 50
 # Game loop
 running = True
 while running:
+    clock.tick(FPS)
     # Handle events
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -64,3 +67,8 @@ while running:
 
 # Clean up
 pygame.quit()
+
+
+
+
+
