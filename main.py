@@ -1,8 +1,14 @@
 import pygame
+#OS is a standard library module, so no need to install it.
+import os
+
+currentDirectory = os.getcwd()
+
 
 #A file written for this project, stored in local directory I think.
+#If you want to use a module from a different directory, you need to add it to the path. Support modules are in the modules folder.
 import sys
-sys.path.insert(1, r'C:/Users/adamt/OneDrive/Documents/programming/super-mango/modules') 
+sys.path.insert(0, currentDirectory+'/modules') 
 
 #Screensize used to determine screenSize dynamically.
 import screenSize
@@ -53,7 +59,10 @@ def startmenu():
 clock = pygame.time.Clock()
 FPS = 50
 # Game loop
+
+#tracking vars 
 running = True
+i = 0
 while running:
     clock.tick(FPS)
     # Handle events
