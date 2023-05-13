@@ -2,6 +2,8 @@ import pygame
 #OS is a standard library module, so no need to install it.
 import os
 
+
+
 currentDirectory = os.getcwd()
 
 
@@ -14,6 +16,8 @@ sys.path.insert(0, currentDirectory+'/modules')
 import screenSize
 #Log used to log messages. If attempting to debug just use a logger
 import log as logger
+#Background class used to create a background object
+from classes.classes import Background
 
 pygame.init()
 
@@ -57,35 +61,28 @@ def startmenu():
 
 
 
-# Create the background image
-background_image = pygame.image.load("./assets/Forest_Background_0.png")
-background_image = pygame.transform.scale(background_image, (screenSize.SCREEN_WIDTH, screenSize.SCREEN_HEIGHT))
 
-def Level1(surface, counter):
-    screen.fill((0, 0, 0))
-    # Move the background
-    screen.blit(surface, (counter, 0))
-    screen.blit(surface, (screenSize.SCREEN_WIDTH + counter, 0))
 
-    if (counter==-screenSize.SCREEN_WIDTH):
-        screen.blit(surface,(screenSize.SCREEN_WIDTH+counter,0))
-        counter=0
-    
-    counter-=1
 
-    return counter
 
 # Game loop
 
 #tracking vars
 running = True
-i = 0
+
+# Create a background object
+bg = Background("Forest_Background_0.png", 0)
+
+# Game loop
 while running:
     startmenu()
-    #i = Level1(background_image, i)
-    # Draw the sprite and update the display
-    
+    #bg.Move(screen)
     pygame.display.update()
 
+    # Handle events such as exiting the game or moving the sprite
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
 # Clean up
 pygame.quit()
+
