@@ -39,13 +39,13 @@ MidpointWidth = (screenSize.SCREEN_WIDTH / 2)
 MidpointHeight = (screenSize.SCREEN_HEIGHT / 8)
 
 #loading new images and resizing them to be the correct fit
-logo = pygame.image.load("C:/Users/adamt/OneDrive/Documents/programming/super-mango/assets/Logo.png")
+logo = pygame.image.load(currentDirectory + "/assets/Logo.png")
 logo = pygame.transform.scale(logo,(300,200))
-skybg0 = pygame.image.load("C:/Users/adamt/OneDrive/Documents/programming/super-mango/assets/Sky_Background_0.png")
+skybg0 = pygame.image.load(currentDirectory + "/assets/Sky_Background_0.png")
 skybg0 = pygame.transform.scale(skybg0, (width, height))
-skybg1 = pygame.image.load("C:/Users/adamt/OneDrive/Documents/programming/super-mango/assets/Sky_Background_1.png")
+skybg1 = pygame.image.load(currentDirectory + "/assets/Sky_Background_1.png")
 skybg1 = pygame.transform.scale(skybg1, (width, height))
-skybg2 = pygame.image.load("C:/Users/adamt/OneDrive/Documents/programming/super-mango/assets/Sky_Background_2.png")
+skybg2 = pygame.image.load(currentDirectory + "/assets/Sky_Background_2.png")
 skybg2 = pygame.transform.scale(skybg2, (width, height))
 
 # function for the start menu
@@ -56,9 +56,22 @@ def startmenu():
     screen.blit(logo,(MidpointWidth - 150 ,MidpointHeight))
 
 
-# Create the background image
-background_image = pygame.image.load("./assets/Forest_Background_0.png")
-background_image = pygame.transform.scale(background_image, (screenSize.SCREEN_WIDTH, screenSize.SCREEN_HEIGHT))
+
+def Level1(counter):
+
+    # Create the background image
+    background_image = pygame.image.load("./assets/Forest_Background_0.png")
+    background_image = pygame.transform.scale(background_image, (screenSize.SCREEN_WIDTH, screenSize.SCREEN_HEIGHT))
+
+    screen.fill((0, 0, 0))
+    # Move the background
+    screen.blit(background_image, (counter, 0))
+    screen.blit(background_image, (screenSize.SCREEN_WIDTH + counter, 0))
+
+    if (counter==-screenSize.SCREEN_WIDTH):
+        screen.blit(background_image,(screenSize.SCREEN_WIDTH+counter,0))
+        counter=0
+    counter-=1
 
 # Game loop
 
@@ -67,15 +80,7 @@ running = True
 i = 0
 while running:
 
-    screen.fill((0, 0, 0))
-    # Move the background
-    screen.blit(background_image, (i, 0))
-    screen.blit(background_image, (screenSize.SCREEN_WIDTH + i, 0))
-
-    if (i==-screenSize.SCREEN_WIDTH):
-        screen.blit(background_image,(screenSize.SCREEN_WIDTH+i,0))
-        i=0
-    i-=1
+    
 
     # Handle events
     for event in pygame.event.get():
