@@ -62,20 +62,10 @@ background_image = pygame.transform.scale(background_image, (screenSize.SCREEN_W
 
 # Game loop
 
-#tracking vars
+#tracking vars 
 running = True
 i = 0
 while running:
-
-    screen.fill((0, 0, 0))
-    # Move the background
-    screen.blit(background_image, (i, 0))
-    screen.blit(background_image, (screenSize.SCREEN_WIDTH + i, 0))
-
-    if (i==-screenSize.SCREEN_WIDTH):
-        screen.blit(background_image,(screenSize.SCREEN_WIDTH+i,0))
-        i=0
-    i-=1
 
     # Handle events
     for event in pygame.event.get():
