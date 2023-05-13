@@ -57,21 +57,23 @@ def startmenu():
 
 
 
-def Level1(counter):
+# Create the background image
+background_image = pygame.image.load("./assets/Forest_Background_0.png")
+background_image = pygame.transform.scale(background_image, (screenSize.SCREEN_WIDTH, screenSize.SCREEN_HEIGHT))
 
-    # Create the background image
-    background_image = pygame.image.load("./assets/Forest_Background_0.png")
-    background_image = pygame.transform.scale(background_image, (screenSize.SCREEN_WIDTH, screenSize.SCREEN_HEIGHT))
-
+def Level1(surface, counter):
     screen.fill((0, 0, 0))
     # Move the background
-    screen.blit(background_image, (counter, 0))
-    screen.blit(background_image, (screenSize.SCREEN_WIDTH + counter, 0))
+    screen.blit(surface, (counter, 0))
+    screen.blit(surface, (screenSize.SCREEN_WIDTH + counter, 0))
 
     if (counter==-screenSize.SCREEN_WIDTH):
-        screen.blit(background_image,(screenSize.SCREEN_WIDTH+counter,0))
+        screen.blit(surface,(screenSize.SCREEN_WIDTH+counter,0))
         counter=0
+    
     counter-=1
+
+    return counter
 
 # Game loop
 
@@ -79,14 +81,8 @@ def Level1(counter):
 running = True
 i = 0
 while running:
-
-    
-
-    # Handle events
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
     startmenu()
+    #i = Level1(background_image, i)
     # Draw the sprite and update the display
     
     pygame.display.update()
