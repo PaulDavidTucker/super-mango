@@ -2,8 +2,6 @@ import pygame
 #OS is a standard library module, so no need to install it.
 import os
 
-
-
 currentDirectory = os.getcwd()
 
 
@@ -70,13 +68,13 @@ def startmenu():
 #tracking vars
 running = True
 
-# Create a background object
-bg = Background("Forest_Background_0.png", 0)
+
+
+
 
 # Game loop
 while running:
     startmenu()
-    #bg.Move(screen)
     pygame.display.update()
 
     # Handle events such as exiting the game or moving the sprite

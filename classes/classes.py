@@ -1,6 +1,19 @@
 import pygame
 import screenSize
 
+class Menu:
+    #Menu class used to create a menu object Make this custom paul please
+    
+    def __init__(self, background, buttons):
+        self.Background0 = background
+        self.Background1 = background
+        self.Background2 = background
+        self.Buttons = buttons
+    
+    def Draw(self, screen):
+        self.Background.Move(screen)
+        
+
 
 class Background:
 
@@ -14,7 +27,6 @@ class Background:
         # Create the background image
         self.background_image = pygame.image.load("./assets/" + self.Image)
         self.background_image = pygame.transform.scale(self.background_image, (screenSize.SCREEN_WIDTH, screenSize.SCREEN_HEIGHT))
-
 
     def Move(self,screen):
         screen.fill((0, 0, 0))
