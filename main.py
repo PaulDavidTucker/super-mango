@@ -1,26 +1,36 @@
+#imports
 import pygame
-#OS is a standard library module, so no need to install it.
 import os
+import sys
 
-currentDirectory = os.getcwd()
+'''
+This project makes use of a logger to track events and errors. 
+Use logger.log.info("message") to log an event.
+Use logger.log.error("message") to log an error.
+Use logger.log.warning("message") to log a warning.
+'''
 
 
 #A file written for this project, stored in local directory I think.
 #If you want to use a module from a different directory, you need to add it to the path. Support modules are in the modules folder.
-import sys
+currentDirectory = os.getcwd()
 sys.path.insert(0, currentDirectory+'/modules') 
 
-#Screensize used to determine screenSize dynamically.
+#local imports from modules folder
 import screenSize
-#Log used to log messages. If attempting to debug just use a logger
 import log as logger
-#Background class used to create a background object
-from classes.classes import Background
+from classes.classes import *
 
+#variables for height and width for simplification
+height = int(screenSize.SCREEN_HEIGHT)
+width = int(screenSize.SCREEN_WIDTH)
+MidpointWidth = (screenSize.SCREEN_WIDTH / 2)
+MidpointHeight = (screenSize.SCREEN_HEIGHT / 8)
+
+# Essential game objects. 
 pygame.init()
-
-# Create the window - GameSize here
-screen = pygame.display.set_mode((screenSize.SCREEN_WIDTH, screenSize.SCREEN_HEIGHT))
+screen = pygame.display.set_mode((width, height))
+clock = pygame.time.Clock()
 
 #Log info
 logger.log.info(f"Screen Size set at: {screenSize.SCREEN_WIDTH} by {screenSize.SCREEN_HEIGHT}")
@@ -34,11 +44,7 @@ sprite.image = sprite_image
 sprite.rect = sprite.image.get_rect()
 sprite.rect.center = screen.get_rect().center
 
-#variables for height and width for simplification
-height = int(screenSize.SCREEN_HEIGHT)
-width = int(screenSize.SCREEN_WIDTH)
-MidpointWidth = (screenSize.SCREEN_WIDTH / 2)
-MidpointHeight = (screenSize.SCREEN_HEIGHT / 8)
+
 
 #loading new images and resizing them to be the correct fit
 logo = pygame.image.load(currentDirectory + "/assets/Logo.png")
@@ -58,24 +64,40 @@ def startmenu():
     screen.blit(logo,(MidpointWidth - 150 ,MidpointHeight))
 
 
+# initialise game objects
 
+player = Player("Bird_1.png", 100, 200)
 
+boxes = pygame.sprite.Group()
 
-
-
-# Game loop
+#Loop to create boxes
+for bx in range(0, screenSize.SCREEN_WIDTH, 48):
+    boxes.add(Box("Grass_Tileset.png", bx, screenSize.SCREEN_HEIGHT - 100))
 
 #tracking vars
 running = True
 
-
-
+#create background object
+background = Background("Sky_Background_0.png", 1)
 
 
 # Game loop
 while running:
-    startmenu()
-    pygame.display.update()
+    pygame.event.pump()
+    player.update()
+    boxes.update()
+
+    # Draw the background
+    background.Move(screen)
+
+    # Draw the sprite
+    player.draw(screen)
+    boxes.draw(screen)
+
+    # Flip the display
+    pygame.display.flip()
+    clock.tick(60)
+
 
     # Handle events such as exiting the game or moving the sprite
     for event in pygame.event.get():

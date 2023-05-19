@@ -1,19 +1,42 @@
+from typing import Any
 import pygame
 import screenSize
 
-class Menu:
-    #Menu class used to create a menu object Make this custom paul please
-    
-    def __init__(self, background, buttons):
-        self.Background0 = background
-        self.Background1 = background
-        self.Background2 = background
-        self.Buttons = buttons
-    
-    def Draw(self, screen):
-        self.Background.Move(screen)
-        
+class Sprite(pygame.sprite.Sprite):
 
+    def __init__(self, image, start_X, start_Y):
+
+        super().__init__()
+
+        self.image = pygame.image.load("./assets/" + image)
+        self.X = start_X
+        self.Y = start_Y
+        self.rect = self.image.get_rect()
+        
+        self.rect.center = (self.X, self.Y)
+
+    def update(self):
+        #TODO: Add update function to allow for movement
+        pass
+
+    def draw(self,screen):
+        screen.blit(self.image, self.rect)
+    
+class Player(Sprite):
+
+    def __init__(self, image, start_X, start_Y):
+        super().__init__(image, start_X, start_Y)
+
+
+class Enemy(Sprite):
+    
+    def __init__(self, image, start_X, start_Y):
+        super().__init__(image, start_X, start_Y)
+
+class Box(Sprite):
+
+    def __init__(self, image, start_X, start_Y):
+        super().__init__(image, start_X, start_Y)
 
 class Background:
 
@@ -41,10 +64,3 @@ class Background:
         self.counter-=1
 
     
-class Level:
-
-    #Level will have a background object parsed to it to allow us to work on both seperately
-
-    def __init__(self, background):
-        self.TileMap = []
-        self.Background = background
