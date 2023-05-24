@@ -36,7 +36,7 @@ clock = pygame.time.Clock()
 logger.log.info(f"Screen Size set at: {screenSize.SCREEN_WIDTH} by {screenSize.SCREEN_HEIGHT}")
 
 # Load the sprite image
-sprite_image = pygame.image.load("./assets/Bird_1.png")
+sprite_image = pygame.image.load("./assets/SplitPNGs/Files/dash_01.png")
 
 # Create the spritegit 
 sprite = pygame.sprite.Sprite()
@@ -66,13 +66,13 @@ def startmenu():
 
 # initialise game objects
 
-player = Player("Bird_1.png", 100, 200)
+player = Player("/SplitPNGs/Files/dash_01.png", 200, 400)
 
 boxes = pygame.sprite.Group()
 
 #Loop to create boxes
-for bx in range(0, screenSize.SCREEN_WIDTH, 48):
-    boxes.add(Box("Grass_Tileset.png", bx, screenSize.SCREEN_HEIGHT - 100))
+for bx in range(24, screenSize.SCREEN_WIDTH, 48):
+    boxes.add(Box("Grass_Tileset.png", bx, screenSize.SCREEN_HEIGHT - 60))
 
 #tracking vars
 running = True

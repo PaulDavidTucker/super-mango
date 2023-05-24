@@ -27,6 +27,41 @@ class Player(Sprite):
     def __init__(self, image, start_X, start_Y):
         super().__init__(image, start_X, start_Y)
 
+        self.stand_image = self.image
+
+        self.walk_cycle = [pygame.image.load(f"./assets/SplitPNGs/Files/walk_{i:0>2}.png") for i in range(1,4)]
+        self.animation_index = 0
+        self.facing_left = False
+
+        self.speed = 5
+
+    def update(self):
+        #get the queue of keys pressed.
+        key = pygame.key.get_pressed()
+        if key[pygame.K_LEFT]:
+            self.facing_left = True
+            self.walk_animation()
+            self.move(-self.speed,0)
+        elif key[pygame.K_RIGHT]:
+            self.facing_left = False
+            self.walk_animation()
+            self.move(self.speed,0)
+        else:
+            self.image = self.stand_image
+
+    def walk_animation(self):
+        self.image = self.walk_cycle[self.animation_index]
+        if self.facing_left:
+            self.image = pygame.transform.flip(self.image, True, False)
+
+        if self.animation_index < len(self.walk_cycle)-1:
+            self.animation_index += 1
+        else:
+            self.animation_index = 0
+
+    def move(self, X, Y):
+        self.rect.move_ip([X, Y])
+
 
 class Enemy(Sprite):
     
