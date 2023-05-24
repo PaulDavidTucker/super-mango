@@ -66,7 +66,7 @@ def startmenu():
 
 # initialise game objects
 
-player = Player("/SplitPNGs/Files/dash_01.png", 200, 400)
+player = Player("/SplitPNGs/Files/dash_01.png", 20, height - 95)
 
 boxes = pygame.sprite.Group()
 
