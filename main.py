@@ -66,13 +66,13 @@ def startmenu():
 
 # initialise game objects
 
-player = Player("/SplitPNGs/Files/dash_01.png", 20, height - 95)
+player = Player("/SplitPNGs/Files/dash_01.png", 0, 0, 50, 50)
 
 boxes = pygame.sprite.Group()
 
 #Loop to create boxes
 for bx in range(24, screenSize.SCREEN_WIDTH, 48):
-    boxes.add(Box("Grass_Tileset.png", bx, screenSize.SCREEN_HEIGHT - 60))
+    boxes.add(Box("Grass_Tileset.png", bx, screenSize.SCREEN_HEIGHT - 150))
 
 #tracking vars
 running = True
@@ -84,7 +84,7 @@ background = Background("Sky_Background_0.png", 1)
 # Game loop
 while running:
     pygame.event.pump()
-    player.update()
+    player.update(boxes)
     boxes.update()
 
     # Draw the background
