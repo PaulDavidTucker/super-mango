@@ -33,9 +33,16 @@ class Player(Sprite):
         self.animation_index = 0
         self.facing_left = False
 
+        #Movememt vals. 
         self.speed = 5
+        self.jump_speed = 20
+        self.gravity = 1
+        self.vert_speed = 0
 
     def update(self):
+        #Values to create gravity.
+        horiz_speed = 0
+        
         #get the queue of keys pressed.
         key = pygame.key.get_pressed()
         if key[pygame.K_LEFT]:
@@ -49,6 +56,17 @@ class Player(Sprite):
         else:
             self.image = self.stand_image
 
+        #jump logic.
+        if key[pygame.K_UP]:
+            self.vert_speed = -self.jumpspeed
+
+        if self.vert_speed < 10:
+            self.vert_speed += self.gravity
+
+
+        #Updating the value with call to move
+        self.move(horiz_speed, self.vert_speed)
+            
     def walk_animation(self):
         self.image = self.walk_cycle[self.animation_index]
         if self.facing_left:
