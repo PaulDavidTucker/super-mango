@@ -58,7 +58,7 @@ class Player(Sprite):
 
         #jump logic.
         if key[pygame.K_UP]:
-            self.vert_speed = -self.jumpspeed
+            self.vert_speed = -self.jump_speed
 
         if self.vert_speed < 10:
             self.vert_speed += self.gravity
